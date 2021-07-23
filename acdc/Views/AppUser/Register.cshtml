@@ -1,0 +1,124 @@
+﻿@model ACDC.Models.UserAccount
+
+@{ ViewData["Title"] = "Register"; }
+@{ Layout = "~/Views/Shared/_AuthLayout.cshtml"; }
+
+<hr />
+<div>
+    <p align="justify"><h4><b>Create your AC/DC Account</b></h4>Continue to AC/DC</p>
+</div>
+<form method="post" id="register">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <input asp-for="fname" class="form-control" id="fname" style="text-transform:capitalize" placeholder="First name" />
+                </div>
+                <span asp-validation-for="fname" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <input asp-for="lname" class="form-control" id="lname" style="text-transform:capitalize" placeholder="Last name" />
+                </div>
+                <span asp-validation-for="lname" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01"><i class="fas fa-venus-mars"></i></label>
+            </div>
+            <select class="custom-select form-control" asp-for="gender" id="gender">
+                <option value="" disabled selected>Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Intersex">Intersex</option>
+                <option value="Trans">Trans</option>
+                <option value="Non-Conforming">Non-Conforming</option>
+                <option value="Personal">Personal</option>
+                <option value="Eunuch">Eunuch</option>
+            </select>
+        </div> 
+        <span asp-validation-for="gender" class="text-danger"></span>
+    </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                        </div>
+                        <input asp-for="email" class="form-control" id="email" placeholder="Email Addresss" />
+                    </div>
+                    <span asp-validation-for="email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fas fa-at"></i>
+                            </div>
+                        </div>
+                        <input asp-for="user" class="form-control" id="user" placeholder="Username" />
+                    </div>
+                    <span asp-validation-for="user" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fas fa-unlock-alt"></i>
+                            </div>
+                        </div>
+                        <input asp-for="pass" class="form-control" id="pass" placeholder="Password" />
+                    </div>
+                    <span asp-validation-for="pass" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                        </div>
+                        <input asp-for="compass" class="form-control" id="compass" placeholder="Confirm Password" />
+                    </div>
+                    <span asp-validation-for="compass" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Register" class="btn btn-primary btn-block" />
+        </div>
+</form>
+<hr />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script src="~/Script/register.js"></script>
+    }
+}
