@@ -90,6 +90,21 @@ namespace ACDC.Controllers
                 {
                     var res = api.AccountCredential(acct);
                     var retval = JsonConvert.DeserializeObject<Response<DataTable>>(res);
+                    var result = retval.data.Rows[0]["Result"].ToString();
+                    var msg = retval.data.Rows[0]["Message"].ToString();
+
+                    if (result.Equals("10"))
+                    {
+                        _msg = msg;
+                        _isSuccess = true;
+                        _resCode = 1;
+                    }
+                    else
+                    {
+                        _msg = msg;
+                        _isSuccess = false;
+                        _resCode = 0;
+                    }
                 }
             }
             catch (Exception ee)

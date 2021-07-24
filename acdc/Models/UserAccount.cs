@@ -46,6 +46,7 @@ namespace ACDC.Models
         [Required(ErrorMessage = "Username is required!")]
         [Display(Name = "Username")]
         public string user { get; set; }
+        
         [Required(ErrorMessage = "Password is required!")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]

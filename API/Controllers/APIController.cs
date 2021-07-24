@@ -54,7 +54,7 @@ namespace API.Controllers
         }
 
         [HttpPost("UserCredential")]
-        public async Task<IActionResult> Credential(Login log)
+        public async Task<IActionResult> Credential([FromBody]Login log)
         {
             var res = await _repost.repos.LoginCredential(log);
             return Ok(res);

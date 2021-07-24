@@ -179,7 +179,7 @@ namespace API.Model
         }
         #endregion
 
-        #region Login User Credential 
+        #region Login Credential 
         public async Task<Response<dynamic>> LoginCredential(Login log)
         {
             var res = new Response<dynamic>();
@@ -196,23 +196,33 @@ namespace API.Model
                     var value = item.GetValue(log);
                     param.Add(name, value);
                 }
-                var response = await _connection.QueryAsync("InsertUser", param, commandType: CommandType.StoredProcedure);
-                res.Code = 200;
-                res.Data = response;
-                JObject o = JObject.Parse(res.Data);
-                res.message = "Successfully Login";
+                var response = await _connection.QueryAsync<ResponseLog>("InsertUser", param, commandType: CommandType.StoredProcedure);
+                var queryList = response.ToList();
+
+                if (queryList[0].Result.ToString().Equals("10"))
+                {
+                    res.Code = 200;
+                    res.Data = response;
+                    res.message = "Successfully Login";
+                }
+                else
+                {
+                    res.Code = 200;
+                    res.Data = response;
+                    res.message = "Failed to Login";
+                }
             }
             catch(SqlException sql)
             {
                 res.Code = 501;
-                res.Data = sql.Message;
                 res.message = "SqlException Error!";
+                res.Data = sql.Message;
             }
             catch (Exception ex)
-            {
-                res.Data = ex.Message;
+            {   
                 res.Code = 500;
                 res.message = "Exception Error!";
+                res.Data = ex.Message;
             }
             return res;
         }

@@ -38,16 +38,18 @@ namespace ACDC.Class
             }
             return val;
         }
+
         public string AccountCredential(Login acc)
         {
-            var val = string.Empty;
+            var res = string.Empty;
+
             try
             {
                 Uri uri = new Uri(string.Format(BaseURL() + "UserCredential"));
                 string jsonData = JsonConvert.SerializeObject(acc);
                 string response = string.Empty;
                 using (var client = new WebClient())
-               {
+                {
                     client.Headers.Add("content-type", "application/json");
                     response = Encoding.ASCII.GetString(client.UploadData(uri, "POST", Encoding.UTF8.GetBytes(jsonData)));
                 }
@@ -55,9 +57,9 @@ namespace ACDC.Class
             }
             catch (Exception)
             {
-                val = "Error 404";
+                res = "Error 404";
             }
-            return val;
+            return res;
         }
-    }
+    } 
 }
